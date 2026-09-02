@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AutoCare 360 - Smart Vehicle Service and Maintenance Management System. Next-gen automotive fleet management and predictive diagnostics built with Object-Oriented Programming.">
+    <meta name="keywords" content="AutoCare 360, Vehicle Service, Fleet Management, Predictive Maintenance, C++ OOP, Vehicle Health Score">
+    <meta name="author" content="Surya G - DSA0111">
+    <title>AutoCare 360 – Smart Vehicle Service & Maintenance Management System</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div id="app-container" class="app-layout">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo-icon">
+                    <div class="logo-core"></div>
+                    <div class="logo-orbit"></div>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">AutoCare <span class="accent-text">360</span></span>
+                    <span class="brand-subtitle">SMART FLEET OS</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-category">MAIN SYSTEM</div>
+                <button class="nav-item active" id="nav-splash" data-screen="splash">
+                    <span class="nav-icon">✨</span>
+                    <span class="nav-label">Welcome Screen</span>
+                    <span class="nav-badge">v2.5</span>
+                </button>
+                <button class="nav-item" id="nav-login" data-screen="login">
+                    <span class="nav-icon">🔐</span>
+                    <span class="nav-label">Admin Login</span>
+                    <span class="nav-badge highlight">Auth</span>
+                </button>
+                <button class="nav-item" id="nav-dashboard" data-screen="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                    <span class="nav-badge highlight">Live</span>
+                </button>
+                <button class="nav-item" id="nav-vehicles" data-screen="vehicles">
+                    <span class="nav-icon">🚗</span>
+                    <span class="nav-label">Vehicles Fleet</span>
+                    <span class="nav-badge count" id="badge-vehicle-count">8</span>
+                </button>
+                <button class="nav-item" id="nav-customers" data-screen="customers">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">Customer Roster</span>
+                    <span class="nav-badge count" id="badge-customer-count">5</span>
+                </button>
+
+                <div class="menu-category">SMART DIAGNOSTICS</div>
+                <button class="nav-item" id="nav-planner" data-screen="planner">
+                    <span class="nav-icon">🧠</span>
+                    <span class="nav-label">Smart Planner</span>
+                    <span class="nav-badge ai">AI</span>
+                </button>
+                <button class="nav-item" id="nav-services" data-screen="services">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Service Booking</span>
+                    <span class="nav-badge oop">OOP</span>
+                </button>
+                <button class="nav-item" id="nav-health" data-screen="health">
+                    <span class="nav-icon">❤️</span>
+                    <span class="nav-label">Health Monitor</span>
+                    <span class="nav-badge score">0-100</span>
+                </button>
+                <button class="nav-item" id="nav-history" data-screen="history">
+                    <span class="nav-icon">📜</span>
+                    <span class="nav-label">Service History</span>
+                </button>
+
+                <div class="menu-category">ANALYTICS & DATA</div>
+                <button class="nav-item" id="nav-reports" data-screen="reports">
+                    <span class="nav-icon">📑</span>
+                    <span class="nav-label">Fleet Reports</span>
+                    <span class="nav-badge">Export</span>
+                </button>
+                <button class="nav-item" id="nav-settings" data-screen="settings">
+                    <span class="nav-icon">💾</span>
+                    <span class="nav-label">Data Persistence</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-auth-footer-pill" id="sidebar-auth-pill">
+                    <div class="user-avatar">CP</div>
+                    <div class="user-details">
+                        <span class="user-role" id="user-display-name">ID: CAPSTONE</span>
+                        <span class="user-sub">Administrator</span>
+                    </div>
+                    <button type="button" id="btn-sidebar-logout" class="btn-icon-logout" title="Logout">🚪</button>
+                </div>
+                <div class="system-status-indicator">
+                    <span class="status-pulse"></span>
+                    <div class="status-info">
+                        <div class="status-title">Engine: C++17 Core</div>
+                        <div class="status-desc">Polymorphism Active</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN VIEWPORT CONTENT -->
+        <main id="main-content" class="main-content">
+            
+            <!-- TOP HEADER BAR -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button id="sidebar-toggle" class="sidebar-toggle-btn" aria-label="Toggle Sidebar">☰</button>
+                    <div class="screen-title-group">
+                        <h1 id="current-screen-title" class="page-title">Welcome to AutoCare 360</h1>
+                        <p id="current-screen-subtitle" class="page-subtitle">Smart Maintenance. Safer Journeys.</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="header-user-pill" id="header-user-pill">
+                        <span class="user-badge-icon">👤</span>
+                        <span id="header-user-id" class="user-name">CAPSTONE</span>
+                        <button type="button" id="btn-header-logout" class="btn-logout-small">Logout</button>
+                    </div>
+                    <div class="header-badge cyan-badge">
+                        <span class="dot">●</span> C++ OOP Strict
+                    </div>
+                    <div class="header-badge emerald-badge">
+                        <span class="dot">●</span> Storage: data/*.txt
+                    </div>
+                    <div class="live-clock" id="system-clock">08:33:44</div>
+                </div>
+            </header>
+
+            <!-- SCREENS CONTAINER -->
+            <div class="screen-viewport">
+
+                <!-- ==================== SCREEN 1: SPLASH ==================== -->
+                <section id="screen-splash" class="app-screen active">
+                    <div class="splash-hero-card">
+                        <div class="splash-glow-backdrop"></div>
+                        <div class="splash-content">
+                            <div class="splash-pill">Next-Gen Vehicle Management OS</div>
+                            <h1 class="splash-brand-title">AUTOCARE <span class="text-gradient">360</span></h1>
+                            <p class="splash-tagline">Smart Maintenance. Safer Journeys.</p>
+                            <p class="splash-description">
+                                Production-grade Object-Oriented vehicle service and predictive diagnostics system. 
+                                Designed with modern C++ architecture, runtime polymorphism, encapsulated fleet tracking, 
+                                and real-time health telemetry algorithms.
+                            </p>
+
+                            <div class="splash-feature-grid">
+                                <div class="splash-feature-box">
+                                    <div class="feature-icon">⚡</div>
+                                    <div class="feature-text">
+                                        <h4>Polymorphic Costing</h4>
+                                        <p>Dynamic virtual dispatch for Basic, Premium & Emergency service tiers.</p>
+                                    </div>
+                                </div>
+                                <div class="splash-feature-box">
+                                    <div class="feature-icon">❤️</div>
+                                    <div class="feature-text">
+                                        <h4>AI Health Index (0-100)</h4>
+                                        <p>Multi-factor degradation telemetry across powertrain, braking & battery.</p>
+                                    </div>
+                                </div>
+                                <div class="splash-feature-box">
+                                    <div class="feature-icon">🧠</div>
+                                    <div class="feature-text">
+                                        <h4>Smart Schedule Planner</h4>
+                                        <p>Overloaded compile-time polymorphic forecasting by vehicle category.</p>
+                                    </div>
+                                </div>
+                                <div class="splash-feature-box">
+                                    <div class="feature-icon">💾</div>
+                                    <div class="feature-text">
+                                        <h4>Full File Persistence</h4>
+                                        <p>Reliable flat-file database storage in <code>data/*.txt</code> with report export.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="splash-actions">
+                                <button id="btn-launch-login" class="btn btn-primary btn-lg">
+                                    <span>LOGIN / START APPLICATION</span>
+                                    <span class="btn-arrow">→</span>
+                                </button>
+                                <button id="btn-launch-dashboard" class="btn btn-secondary btn-lg">
+                                    <span>DIRECT DASHBOARD (DEV)</span>
+                                </button>
+                                <button id="btn-quick-demo" class="btn btn-outline btn-lg">
+                                    <span>RUN DIAGNOSTICS</span>
+                                </button>
+                            </div>
+
+                            <div class="splash-footer-note">
+                                <span>DSA0111 Object-Oriented Programming Assignment • High Distinction</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 1.5: LOGIN ==================== -->
+                <section id="screen-login" class="app-screen">
+                    <div class="login-container-card">
+                        <div class="login-glow-circle"></div>
+                        <div class="login-header">
+                            <div class="login-icon-badge">🔐</div>
+                            <h2 class="login-title">Administrator Authentication</h2>
+                            <p class="login-subtitle">Enter Authorized Security Credentials to Access AutoCare 360</p>
+                        </div>
+
+                        <!-- Authorized Credentials Prompt Callout -->
+                        <div class="auth-credentials-callout">
+                            <div class="callout-header">
+                                <span class="badge badge-cyan">SYSTEM ACCESS KEY</span>
+                                <button type="button" id="btn-autofill-login" class="btn-tiny">Auto-Fill Credentials</button>
+                            </div>
+                            <div class="credentials-row">
+                                <div class="cred-item">
+                                    <span class="cred-label">LOGIN ID:</span>
+                                    <span class="cred-value">CAPSTONE</span>
+                                </div>
+                                <div class="cred-item">
+                                    <span class="cred-label">PASSWORD:</span>
+                                    <span class="cred-value">12345678</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="login-form" class="login-form">
+                            <div id="login-alert" class="login-alert-box hidden">
+                                <span class="alert-icon">⚠️</span>
+                                <span id="login-alert-msg" class="alert-text">Invalid Login ID or Password.</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="login-id">Authorized Login ID</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">👤</span>
+                                    <input type="text" id="login-id" placeholder="Enter ID (e.g. CAPSTONE)" required class="form-control login-input" autocomplete="username">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="login-password">System Password</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">🔒</span>
+                                    <input type="password" id="login-password" placeholder="Enter Password (e.g. 12345678)" required class="form-control login-input" autocomplete="current-password">
+                                    <button type="button" id="btn-toggle-pwd" class="btn-pwd-toggle" aria-label="Toggle Password Visibility">👁️</button>
+                                </div>
+                            </div>
+
+                            <div class="login-options-row">
+                                <label class="remember-label">
+                                    <input type="checkbox" id="login-remember" checked> Remember session
+                                </label>
+                                <span class="security-tag">256-Bit Encrypted</span>
+                            </div>
+
+                            <button type="submit" id="btn-submit-login" class="btn btn-primary btn-block btn-lg">
+                                <span id="login-btn-text">SIGN IN TO AUTOCARE 360</span>
+                                <span class="btn-arrow">→</span>
+                            </button>
+                        </form>
+
+                        <div class="login-footer">
+                            <span>Role: Fleet Administrator / Master Technician • Access: Unrestricted</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 2: DASHBOARD ==================== -->
+                <section id="screen-dashboard" class="app-screen">
+                    <!-- KPI Cards Grid -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card cyan-kpi">
+                            <div class="kpi-header">
+                                <span class="kpi-label">TOTAL FLEET</span>
+                                <span class="kpi-icon">🚗</span>
+                            </div>
+                            <div class="kpi-value" id="kpi-total-vehicles">8</div>
+                            <div class="kpi-footer">Registered Vehicles in Active Database</div>
+                            <div class="kpi-glow"></div>
+                        </div>
+
+                        <div class="kpi-card amber-kpi">
+                            <div class="kpi-header">
+                                <span class="kpi-label">SERVICES DUE</span>
+                                <span class="kpi-icon">⚠️</span>
+                            </div>
+                            <div class="kpi-value" id="kpi-services-due">3</div>
+                            <div class="kpi-footer">Intervals exceeding 8,000 km threshold</div>
+                            <div class="kpi-glow"></div>
+                        </div>
+
+                        <div class="kpi-card emerald-kpi">
+                            <div class="kpi-header">
+                                <span class="kpi-label">COMPLETED SERVICES</span>
+                                <span class="kpi-icon">✅</span>
+                            </div>
+                            <div class="kpi-value" id="kpi-completed-services">9</div>
+                            <div class="kpi-footer">Logged Work Orders with Polymorphic Costs</div>
+                            <div class="kpi-glow"></div>
+                        </div>
+
+                        <div class="kpi-card crimson-kpi">
+                            <div class="kpi-header">
+                                <span class="kpi-label">HIGH PRIORITY ALERTS</span>
+                                <span class="kpi-icon">🚨</span>
+                            </div>
+                            <div class="kpi-value" id="kpi-high-priority">2</div>
+                            <div class="kpi-footer">Vehicles requiring immediate mechanical inspection</div>
+                            <div class="kpi-glow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Main Content Grid -->
+                    <div class="dashboard-content-grid">
+                        <!-- Left: Recent Services Table -->
+                        <div class="card glass-card span-2">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Recent Work Orders (Polymorphic Billing)</h3>
+                                    <p class="card-subtitle">Real-time cost calculated via derived service class overrides</p>
+                                </div>
+                                <button class="btn btn-sm btn-outline" id="btn-dash-new-service">+ Book Service</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" id="dashboard-services-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Vehicle Reg</th>
+                                            <th>Service Tier</th>
+                                            <th>Service Date</th>
+                                            <th>Odometer</th>
+                                            <th>Calculated Cost</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dashboard-services-body">
+                                        <!-- Injected dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Right: Financials & Quick Actions -->
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <h3 class="card-title">Financial Summary</h3>
+                            </div>
+                            <div class="financial-hero-box">
+                                <span class="fin-label">CUMULATIVE FLEET REVENUE</span>
+                                <h2 class="fin-amount" id="dashboard-total-revenue">$3,430.00</h2>
+                                <span class="fin-tag">Dynamically Calculated across 3 Derived Classes</span>
+                            </div>
+
+                            <div class="quick-actions-list">
+                                <button class="btn-action" data-nav="vehicles">
+                                    <span class="act-icon">➕</span>
+                                    <span class="act-text">Register New Vehicle</span>
+                                    <span class="act-arrow">→</span>
+                                </button>
+                                <button class="btn-action" data-nav="services">
+                                    <span class="act-icon">⭐</span>
+                                    <span class="act-text">Polymorphic Service Estimator</span>
+                                    <span class="act-arrow">→</span>
+                                </button>
+                                <button class="btn-action" data-nav="planner">
+                                    <span class="act-icon">🧠</span>
+                                    <span class="act-text">Run Predictive Maintenance AI</span>
+                                    <span class="act-arrow">→</span>
+                                </button>
+                                <button class="btn-action" data-nav="health">
+                                    <span class="act-icon">❤️</span>
+                                    <span class="act-text">Vehicle Health Telemetry</span>
+                                    <span class="act-arrow">→</span>
+                                </button>
+                                <button class="btn-action" data-nav="reports">
+                                    <span class="act-icon">🗎</span>
+                                    <span class="act-text">Export Management Reports</span>
+                                    <span class="act-arrow">→</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 3: VEHICLES ==================== -->
+                <section id="screen-vehicles" class="app-screen">
+                    <div class="split-layout">
+                        <!-- Vehicle Form -->
+                        <div class="card glass-card form-panel">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Vehicle Registration Form</h3>
+                                    <p class="card-subtitle">Encapsulated vehicle entity with validation</p>
+                                </div>
+                            </div>
+                            <form id="vehicle-form" class="app-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="v-id">Vehicle ID</label>
+                                        <input type="number" id="v-id" placeholder="Auto-generated" readonly class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="v-reg">Registration Plate *</label>
+                                        <input type="text" id="v-reg" placeholder="e.g. KA-01-MJ-4589" required class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="v-brand">Brand / Make *</label>
+                                        <input type="text" id="v-brand" placeholder="e.g. Toyota" required class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="v-model">Model Name *</label>
+                                        <input type="text" id="v-model" placeholder="e.g. Camry Hybrid" required class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="v-type">Vehicle Type</label>
+                                        <select id="v-type" class="form-control">
+                                            <option value="Sedan">Sedan</option>
+                                            <option value="SUV">SUV</option>
+                                            <option value="Electric">Electric Vehicle (EV)</option>
+                                            <option value="Truck">Truck / Commercial</option>
+                                            <option value="Hatchback">Hatchback</option>
+                                            <option value="Coupe">Sports / Coupe</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="v-year">Manufacturing Year</label>
+                                        <input type="number" id="v-year" min="1970" max="2026" value="2022" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="v-km">Odometer Reading (Km)</label>
+                                        <input type="number" id="v-km" min="0" value="38500" required class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="v-owner">Owner Customer</label>
+                                        <select id="v-owner" class="form-control">
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions-grid">
+                                    <button type="submit" id="btn-add-vehicle" class="btn btn-primary">Add Vehicle</button>
+                                    <button type="button" id="btn-update-vehicle" class="btn btn-secondary">Update Selected</button>
+                                    <button type="button" id="btn-delete-vehicle" class="btn btn-danger">Delete</button>
+                                    <button type="button" id="btn-clear-vehicle" class="btn btn-outline">Clear</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Vehicles Inventory Table -->
+                        <div class="card glass-card table-panel">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Registered Fleet Inventory</h3>
+                                    <p class="card-subtitle">Click any row to populate details or run diagnostics</p>
+                                </div>
+                                <div class="search-box">
+                                    <input type="text" id="search-vehicles" placeholder="🔍 Search by Plate, Brand or Model..." class="search-input">
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" id="vehicles-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Plate #</th>
+                                            <th>Make & Model</th>
+                                            <th>Type</th>
+                                            <th>Year</th>
+                                            <th>Odometer</th>
+                                            <th>Owner</th>
+                                            <th>Health</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="vehicles-table-body">
+                                        <!-- Dynamically generated -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 4: CUSTOMERS ==================== -->
+                <section id="screen-customers" class="app-screen">
+                    <div class="split-layout">
+                        <!-- Customer Form -->
+                        <div class="card glass-card form-panel">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Customer Profile Manager</h3>
+                                    <p class="card-subtitle">Demonstrates Inheritance: Person → Customer</p>
+                                </div>
+                            </div>
+                            <form id="customer-form" class="app-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="c-id">Customer ID</label>
+                                        <input type="number" id="c-id" placeholder="Auto" readonly class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="c-name">Full Name *</label>
+                                        <input type="text" id="c-name" placeholder="e.g. Alexander Wright" required class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="c-phone">Phone Number *</label>
+                                    <input type="text" id="c-phone" placeholder="+1 (555) 234-8890" required class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="c-email">Email Address *</label>
+                                    <input type="email" id="c-email" placeholder="alex.wright@autoclub.com" required class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="c-address">Street Address</label>
+                                    <input type="text" id="c-address" placeholder="742 Evergreen Terrace, Springfield" class="form-control">
+                                </div>
+
+                                <div class="form-actions-grid">
+                                    <button type="submit" id="btn-add-customer" class="btn btn-primary">Add Customer</button>
+                                    <button type="button" id="btn-update-customer" class="btn btn-secondary">Update Selected</button>
+                                    <button type="button" id="btn-delete-customer" class="btn btn-danger">Delete</button>
+                                    <button type="button" id="btn-clear-customer" class="btn btn-outline">Clear</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Customer Directory Table -->
+                        <div class="card glass-card table-panel">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Customer Directory & Fleet Ownership</h3>
+                                    <p class="card-subtitle">Encapsulated client directory with registered vehicle counts</p>
+                                </div>
+                                <div class="search-box">
+                                    <input type="text" id="search-customers" placeholder="🔍 Search name, phone or email..." class="search-input">
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" id="customers-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Client Name</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                            <th>Vehicles</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="customers-table-body">
+                                        <!-- Dynamically generated -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 5: MAINTENANCE PLANNER ==================== -->
+                <section id="screen-planner" class="app-screen">
+                    <div class="split-layout">
+                        <!-- Controls Panel -->
+                        <div class="card glass-card form-panel">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Smart Maintenance Planner</h3>
+                                    <p class="card-subtitle">Compile-Time Polymorphism (Function Overloading)</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="planner-vehicle-select">Target Vehicle</label>
+                                <select id="planner-vehicle-select" class="form-control select-lg">
+                                    <!-- Options injected via JS -->
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Maintenance Category</label>
+                                <div class="category-button-grid" id="planner-category-buttons">
+                                    <button type="button" class="cat-btn active" data-cat="Oil Change">🛢️ Oil Change</button>
+                                    <button type="button" class="cat-btn" data-cat="Engine Service">⚙️ Engine Service</button>
+                                    <button type="button" class="cat-btn" data-cat="Brake Inspection">🛑 Brake Inspection</button>
+                                    <button type="button" class="cat-btn" data-cat="Tire Replacement">🔘 Tire Replacement</button>
+                                    <button type="button" class="cat-btn" data-cat="Battery Check">🔋 Battery Check</button>
+                                    <button type="button" class="cat-btn" data-cat="General Service">🛠️ General Service</button>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="planner-cur-km">Current Odometer (Km)</label>
+                                    <input type="number" id="planner-cur-km" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="planner-last-km">Last Service Odometer (Km)</label>
+                                    <input type="number" id="planner-last-km" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="oop-demonstration-callout">
+                                <div class="callout-badge">C++ Overloading In Action</div>
+                                <div class="code-preview">
+                                    <code>calculateNextService(km, vehicleType, maintType);</code><br>
+                                    <code>determinePriority(km, lastKm, maintType, healthScore);</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Computed Output Matrix -->
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Predictive Scheduling & Diagnostics Matrix</h3>
+                                    <p class="card-subtitle" id="planner-matrix-subtitle">Vehicle Telemetry Results</p>
+                                </div>
+                            </div>
+
+                            <div class="matrix-grid">
+                                <div class="matrix-card">
+                                    <span class="m-label">RECOMMENDED SERVICE KM</span>
+                                    <div class="m-val cyan-text" id="res-next-km">45,000 km</div>
+                                    <span class="m-sub" id="res-km-remaining">6,500 km remaining</span>
+                                </div>
+
+                                <div class="matrix-card">
+                                    <span class="m-label">MAINTENANCE PRIORITY</span>
+                                    <div class="m-val" id="res-priority-badge"><span class="badge badge-emerald">LOW</span></div>
+                                    <span class="m-sub" id="res-priority-sub">Optimal operational range</span>
+                                </div>
+
+                                <div class="matrix-card">
+                                    <span class="m-label">ESTIMATED DUE DATE</span>
+                                    <div class="m-val indigo-text" id="res-est-date">2027-02-13</div>
+                                    <span class="m-sub">Forecasted at ~1,200 km/month</span>
+                                </div>
+
+                                <div class="matrix-card">
+                                    <span class="m-label">ESTIMATED SERVICE COST</span>
+                                    <div class="m-val emerald-text" id="res-est-cost">$75.00</div>
+                                    <span class="m-sub" id="res-cost-sub">Based on vehicle type multiplier</span>
+                                </div>
+                            </div>
+
+                            <!-- Action Advisory Box -->
+                            <div class="advisory-box" id="res-advisory-box">
+                                <div class="advisory-icon">💡</div>
+                                <div class="advisory-content">
+                                    <h4 class="advisory-title">Smart Advisory Recommendation:</h4>
+                                    <p class="advisory-text" id="res-advisory-text">Vehicle operating in optimal parameters. Routine check on schedule.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 6: SERVICE MANAGEMENT ==================== -->
+                <section id="screen-services" class="app-screen">
+                    <div class="split-layout">
+                        <!-- Service Booking Form -->
+                        <div class="card glass-card form-panel">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Polymorphic Service Booking</h3>
+                                    <p class="card-subtitle">Runtime Polymorphism & Virtual Function Dispatch</p>
+                                </div>
+                            </div>
+
+                            <!-- Service Tier Selector -->
+                            <div class="service-tier-tabs">
+                                <button type="button" class="tier-tab active" data-tier="BASIC">
+                                    <span class="t-icon">🔧</span>
+                                    <span class="t-title">Basic Service</span>
+                                    <span class="t-sub">Routine maintenance</span>
+                                </button>
+                                <button type="button" class="tier-tab" data-tier="PREMIUM">
+                                    <span class="t-icon">⭐</span>
+                                    <span class="t-title">Premium Service</span>
+                                    <span class="t-sub">150-Point inspection</span>
+                                </button>
+                                <button type="button" class="tier-tab" data-tier="EMERGENCY">
+                                    <span class="t-icon">🚨</span>
+                                    <span class="t-title">Emergency</span>
+                                    <span class="t-sub">Urgent breakdown</span>
+                                </button>
+                            </div>
+
+                            <form id="service-booking-form" class="app-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="srv-vehicle">Target Vehicle</label>
+                                        <select id="srv-vehicle" class="form-control" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="srv-date">Service Date</label>
+                                        <input type="date" id="srv-date" value="2026-09-02" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="srv-base">Base Labor Cost ($)</label>
+                                        <input type="number" id="srv-base" value="80.00" step="0.01" min="0" class="form-control calc-trigger">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="srv-km">Odometer Reading (Km)</label>
+                                        <input type="number" id="srv-km" value="45000" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Dynamic Subclass Inputs (Swapped via JS) -->
+                                <div id="tier-inputs-basic" class="tier-input-group">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="srv-parts">Parts & Fluids Cost ($)</label>
+                                            <input type="number" id="srv-parts" value="45.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="srv-discount">Loyalty Discount ($)</label>
+                                            <input type="number" id="srv-discount" value="10.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="srv-oil">Oil Specification</label>
+                                        <input type="text" id="srv-oil" value="5W-30 Synthetic Blend" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div id="tier-inputs-premium" class="tier-input-group hidden">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="srv-insp">150-Pt Inspection Fee ($)</label>
+                                            <input type="number" id="srv-insp" value="75.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="srv-synth">Full Synthetic Oil Charge ($)</label>
+                                            <input type="number" id="srv-synth" value="60.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="srv-detail">Detailing Package ($)</label>
+                                            <input type="number" id="srv-detail" value="50.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="srv-scan">OBD-II Diagnostic Scan ($)</label>
+                                            <input type="number" id="srv-scan" value="40.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="tier-inputs-emergency" class="tier-input-group hidden">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="srv-towing">Emergency Towing Fee ($)</label>
+                                            <input type="number" id="srv-towing" value="120.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="srv-overtime">Overtime Labor Surcharge ($)</label>
+                                            <input type="number" id="srv-overtime" value="95.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="srv-rapid">Rapid Diagnostics Charge ($)</label>
+                                            <input type="number" id="srv-rapid" value="80.00" step="0.01" class="form-control calc-trigger">
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label><input type="checkbox" id="srv-roadside" checked> On-Site Roadside Dispatch (+$50.00)</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="srv-notes">Technician Diagnostic Notes</label>
+                                    <input type="text" id="srv-notes" value="Comprehensive scheduled checkup" class="form-control">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block btn-lg">
+                                    <span>CALCULATE & BOOK WORK ORDER</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Right Panel: Polymorphic Simulator & Live Formula Breakdown -->
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Polymorphic Dynamic Dispatch</h3>
+                                    <p class="card-subtitle">Demonstration of vtable virtual method resolution</p>
+                                </div>
+                            </div>
+
+                            <div class="formula-breakdown-card" id="active-formula-card">
+                                <div class="formula-header">
+                                    <span class="formula-class-name" id="formula-class">BasicService::calculateCost()</span>
+                                    <span class="badge badge-cyan">Virtual Override</span>
+                                </div>
+                                <div class="formula-expression" id="formula-expr">
+                                    Total = (BaseCost + PartsCost) - LabourDiscount
+                                </div>
+                                <p class="formula-explanation" id="formula-desc">
+                                    Dynamically dispatched at runtime through <code>Service*</code> pointer. 
+                                    Ensures derived class arithmetic executes without explicit conditionals.
+                                </p>
+                            </div>
+
+                            <div class="live-cost-preview-box">
+                                <span class="cost-preview-label">REAL-TIME COMPUTED INVOICE</span>
+                                <h1 class="cost-preview-amount" id="live-calculated-cost">$115.00</h1>
+                                <span class="cost-preview-tag">Polymorphic Output</span>
+                            </div>
+
+                            <div class="code-box">
+                                <div class="code-title">C++ Polymorphic Dispatch Pattern</div>
+                                <pre><code>// Vector storing base class smart pointers
+std::vector&lt;std::shared_ptr&lt;Service&gt;&gt; services;
+
+// Invoking overridden virtual function dynamically
+for (const auto& s : services) {
+    double total = s->calculateCost(); // Dynamic dispatch!
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 7: VEHICLE HEALTH ==================== -->
+                <section id="screen-health" class="app-screen">
+                    <div class="split-layout">
+                        <!-- Vehicle Selector List -->
+                        <div class="card glass-card form-panel">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Fleet Diagnostic Selector</h3>
+                                    <p class="card-subtitle">Select a vehicle to inspect live telemetry</p>
+                                </div>
+                            </div>
+                            <div class="health-fleet-list" id="health-fleet-list">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Health Dashboard -->
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title" id="health-target-title">AI Diagnostics: KA-01-MJ-4589</h3>
+                                    <p class="card-subtitle" id="health-target-subtitle">Toyota Camry Hybrid (2022)</p>
+                                </div>
+                            </div>
+
+                            <div class="health-top-summary">
+                                <!-- Circular Gauge -->
+                                <div class="circular-gauge-container">
+                                    <svg class="gauge-svg" viewBox="0 0 160 160">
+                                        <circle class="gauge-track" cx="80" cy="80" r="68"></circle>
+                                        <circle class="gauge-fill" id="health-gauge-circle" cx="80" cy="80" r="68"></circle>
+                                    </svg>
+                                    <div class="gauge-center-content">
+                                        <span class="gauge-number" id="health-score-val">99</span>
+                                        <span class="gauge-label">/ 100</span>
+                                        <span class="gauge-status-badge" id="health-score-status">Excellent</span>
+                                    </div>
+                                </div>
+
+                                <!-- Key Stats -->
+                                <div class="health-key-stats">
+                                    <div class="h-stat-box">
+                                        <span class="hs-label">ODOMETER READING</span>
+                                        <h3 class="hs-val" id="health-stat-km">38,500 km</h3>
+                                        <span class="hs-sub" id="health-stat-last-km">Last service at 35,000 km</span>
+                                    </div>
+                                    <div class="h-stat-box">
+                                        <span class="hs-label">OVERDUE SERVICES</span>
+                                        <h3 class="hs-val emerald-text" id="health-stat-overdue">0 Pending</h3>
+                                        <span class="hs-sub">Maintenance is up to date</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-system Health Breakdown -->
+                            <div class="subsystems-section">
+                                <h4 class="section-title">Component Diagnostic Telemetry</h4>
+                                <div class="subsystem-bars-grid">
+                                    <div class="subsystem-item">
+                                        <div class="sub-header">
+                                            <span>Powertrain / Engine</span>
+                                            <span id="val-engine">100%</span>
+                                        </div>
+                                        <div class="prog-bar"><div class="prog-fill cyan-fill" id="bar-engine" style="width: 100%"></div></div>
+                                    </div>
+
+                                    <div class="subsystem-item">
+                                        <div class="sub-header">
+                                            <span>Braking System & ABS</span>
+                                            <span id="val-brake">99%</span>
+                                        </div>
+                                        <div class="prog-bar"><div class="prog-fill emerald-fill" id="bar-brake" style="width: 99%"></div></div>
+                                    </div>
+
+                                    <div class="subsystem-item">
+                                        <div class="sub-header">
+                                            <span>Battery & Cranking Voltage</span>
+                                            <span id="val-battery">95%</span>
+                                        </div>
+                                        <div class="prog-bar"><div class="prog-fill amber-fill" id="bar-battery" style="width: 95%"></div></div>
+                                    </div>
+
+                                    <div class="subsystem-item">
+                                        <div class="sub-header">
+                                            <span>Suspension & Chassis</span>
+                                            <span id="val-suspension">98%</span>
+                                        </div>
+                                        <div class="prog-bar"><div class="prog-fill indigo-fill" id="bar-suspension" style="width: 98%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Recommendation Box -->
+                            <div class="advisory-box" id="health-recommendation-box">
+                                <div class="advisory-icon">❤️</div>
+                                <div class="advisory-content">
+                                    <h4 class="advisory-title">Primary Diagnostic Recommendation:</h4>
+                                    <p class="advisory-text" id="health-recommendation-text">OPTIMAL STATUS: Vehicle is running at peak factory performance. Follow standard maintenance intervals.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 8: SERVICE HISTORY ==================== -->
+                <section id="screen-history" class="app-screen">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">Service History & Telemetry Logs</h3>
+                                <p class="card-subtitle">Complete historical archive of polymorphic work orders</p>
+                            </div>
+                            <div class="history-controls">
+                                <div class="filter-pill-group" id="history-filter-group">
+                                    <button class="pill-btn active" data-filter="ALL">ALL (10)</button>
+                                    <button class="pill-btn" data-filter="Basic Service">Basic</button>
+                                    <button class="pill-btn" data-filter="Premium Service">Premium</button>
+                                    <button class="pill-btn" data-filter="Emergency Service">Emergency</button>
+                                </div>
+                                <input type="text" id="search-history" placeholder="🔍 Search vehicle plate..." class="search-input">
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="data-table" id="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Vehicle Plate</th>
+                                        <th>Service Tier</th>
+                                        <th>Service Date</th>
+                                        <th>Odometer</th>
+                                        <th>Calculated Cost</th>
+                                        <th>Status</th>
+                                        <th>Diagnostic Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="history-table-body">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 9: REPORTS ==================== -->
+                <section id="screen-reports" class="app-screen">
+                    <div class="split-layout">
+                        <!-- Report Menu -->
+                        <div class="card glass-card form-panel">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Analytical Report Suite</h3>
+                                    <p class="card-subtitle">Generate formatted executive summaries</p>
+                                </div>
+                            </div>
+
+                            <div class="reports-menu-list">
+                                <button class="report-menu-btn active" data-rep="financial">
+                                    <span class="rep-icon">💰</span>
+                                    <div class="rep-info">
+                                        <div class="rep-title">1. Financial & Revenue Breakdown</div>
+                                        <div class="rep-desc">Polymorphic billing by tier & revenue shares</div>
+                                    </div>
+                                </button>
+                                <button class="report-menu-btn" data-rep="vehicle">
+                                    <span class="rep-icon">🚗</span>
+                                    <div class="rep-info">
+                                        <div class="rep-title">2. Vehicle Diagnostic Report</div>
+                                        <div class="rep-desc">Individual health telemetry & service records</div>
+                                    </div>
+                                </button>
+                                <button class="report-menu-btn" data-rep="upcoming">
+                                    <span class="rep-icon">📅</span>
+                                    <div class="rep-info">
+                                        <div class="rep-title">3. Upcoming Maintenance Schedule</div>
+                                        <div class="rep-desc">Predictive forecast and next service km</div>
+                                    </div>
+                                </button>
+                                <button class="report-menu-btn" data-rep="priority">
+                                    <span class="rep-icon">🚨</span>
+                                    <div class="rep-info">
+                                        <div class="rep-title">4. High Priority Fleet Alert</div>
+                                        <div class="rep-desc">Critical vehicles requiring urgent checkups</div>
+                                    </div>
+                                </button>
+                                <button class="report-menu-btn" data-rep="customer">
+                                    <span class="rep-icon">👥</span>
+                                    <div class="rep-info">
+                                        <div class="rep-title">5. Customer Portfolio Report</div>
+                                        <div class="rep-desc">Client account profiles & registered assets</div>
+                                    </div>
+                                </button>
+                            </div>
+
+                            <div class="report-actions">
+                                <button id="btn-download-report" class="btn btn-primary btn-block">
+                                    <span>📥 DOWNLOAD ACTIVE REPORT (.TXT)</span>
+                                </button>
+                                <button id="btn-download-csv" class="btn btn-secondary btn-block">
+                                    <span>📊 EXPORT DATASET AS CSV</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Live Mono Previewer -->
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Live Document Preview</h3>
+                                    <p class="card-subtitle" id="report-preview-subtitle">AutoCare 360 Financial Report</p>
+                                </div>
+                            </div>
+                            <div class="terminal-preview-container">
+                                <pre class="terminal-code" id="report-terminal-output"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SCREEN 10: SETTINGS ==================== -->
+                <section id="screen-settings" class="app-screen">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">Data Storage & File Persistence Integrity</h3>
+                                <p class="card-subtitle">Active flat-file database configurations</p>
+                            </div>
+                            <button id="btn-reset-sample-data" class="btn btn-sm btn-outline">↺ Reset Sample Dataset</button>
+                        </div>
+
+                        <div class="settings-grid">
+                            <div class="setting-card">
+                                <div class="sc-header">
+                                    <span class="sc-badge cyan-badge">Active</span>
+                                    <h4>Customer Database</h4>
+                                </div>
+                                <div class="sc-path"><code>data/customers.txt</code></div>
+                                <p class="sc-desc">Stores personal identities, contact records, and dynamic ownership lists.</p>
+                            </div>
+
+                            <div class="setting-card">
+                                <div class="sc-header">
+                                    <span class="sc-badge indigo-badge">Active</span>
+                                    <h4>Vehicle Fleet Inventory</h4>
+                                </div>
+                                <div class="sc-path"><code>data/vehicles.txt</code></div>
+                                <p class="sc-desc">Stores encapsulated odometer readings, license plates, and specifications.</p>
+                            </div>
+
+                            <div class="setting-card">
+                                <div class="sc-header">
+                                    <span class="sc-badge emerald-badge">Active</span>
+                                    <h4>Polymorphic Service History</h4>
+                                </div>
+                                <div class="sc-path"><code>data/services.txt</code></div>
+                                <p class="sc-desc">Stores serialized polymorphic types (BASIC, PREMIUM, EMERGENCY) with specific charges.</p>
+                            </div>
+
+                            <div class="setting-card">
+                                <div class="sc-header">
+                                    <span class="sc-badge amber-badge">Active</span>
+                                    <h4>Export Directory</h4>
+                                </div>
+                                <div class="sc-path"><code>reports/*.txt</code></div>
+                                <p class="sc-desc">Destination directory for exported analytical summaries and audits.</p>
+                            </div>
+                        </div>
+
+                        <div class="database-viewer-section">
+                            <h4 class="section-title">Database Raw Content Inspection</h4>
+                            <div class="db-tabs">
+                                <button class="db-tab-btn active" data-db="vehicles">data/vehicles.txt</button>
+                                <button class="db-tab-btn" data-db="customers">data/customers.txt</button>
+                                <button class="db-tab-btn" data-db="services">data/services.txt</button>
+                            </div>
+                            <div class="terminal-preview-container">
+                                <pre class="terminal-code" id="raw-db-preview"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            
+            <!-- FLOATING TOAST NOTIFICATION -->
+            <div id="toast-notification" class="toast-notification">
+                <span class="toast-icon">✨</span>
+                <span class="toast-message" id="toast-msg">AutoCare 360 Ready</span>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
